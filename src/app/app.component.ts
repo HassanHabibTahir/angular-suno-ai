@@ -43,11 +43,12 @@ export class AppComponent {
     this.eventSubscription = this.socketService
       .on('new-event')
       .subscribe((data) => {
-        console.log('Event received in component:', data);
-        // this.songService.generateSong({
-        //   prompt: this.prompt,
-        //   tags: this.tags,
-        //   title: this.title,
+        let event = data?.event?.parameters
+        if(event>=1){
+  // this.songService.generateSong({
+        //   prompt: event?.message,
+        //   tags: '',
+        //   title: event?.username,
         //   make_instrumental: true,
         //   wait_audio: true,
         // }).pipe(
@@ -67,6 +68,9 @@ export class AppComponent {
         //     console.error('Error in subscription:', error);
         //   },
         // });
+        }
+        console.log('Event received in component:', data);
+      
       });
   }
 
