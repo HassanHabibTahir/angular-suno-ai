@@ -1,0 +1,10 @@
+<div class="song-list">
+    <div *ngFor="let song of songs" class="song-card">
+      <img [src]="song?.image_url" [alt]="song?.title" class="song-image"/>
+      <div class="content">
+        <h2>{{ song?.title }}</h2>
+        <button class="play-button" (click)="onSongSelect(song.id)">Play Song</button>
+      </div>
+    </div>
+  </div>
+  
