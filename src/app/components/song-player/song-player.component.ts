@@ -6,6 +6,8 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
+  Output,
+  EventEmitter,
   ChangeDetectorRef
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,7 +21,8 @@ import { SongService } from '../../services/song.service';
   styleUrls: ['./song-player.component.scss'],
 })
 export class SongPlayerComponent implements OnChanges, AfterViewInit {
-  @Input() songId: string | null = null;
+  @Input() songId: any | null = null;
+  @Output() songEnded = new EventEmitter<void>();
   song: any = null;
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
@@ -32,21 +35,29 @@ export class SongPlayerComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.cdr.detectChanges(); // Ensure view is updated
+    this.cdr.detectChanges();
   }
 
   fetchSong(songId: string): void {
     this.songService.getSongById(songId).subscribe({
       next: (fetchedSong) => {
         this.song = fetchedSong[0];
-        this.cdr.detectChanges(); // Ensure the view is updated before accessing the DOM
+        this.cdr.detectChanges();
 
-        // Wait for the audio player to be ready
         if (this.audioPlayer && this.audioPlayer.nativeElement) {
           this.audioPlayer.nativeElement.oncanplay = () => {
             this.audioPlayer.nativeElement.play().catch((error) => {
               console.error('Error auto-playing audio:', error);
             });
+          };
+
+          this.audioPlayer.nativeElement.onended = () => {
+            console.log('song ended emit');
+            try {
+              this.songEnded.emit();
+            } catch (error) {
+              console.error('Error emitting songEnded event:', error);
+            }
           };
         }
       },

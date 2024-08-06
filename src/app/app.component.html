@@ -1,23 +1,22 @@
 <main class="main">
   <div class="container">
     <div class="screen-divider">
+
       <div class="song-list-container">
-      <div class="songList_container">
-        <h1>Song List</h1>
-        <button class="createsongbtn" (click)="openSongFormModal()">Create New Song</button>
-      </div>
+        <div class="songList_container">
+
+          <button class="createsongbtn" (click)="openSongFormModal()">Create New Song</button>
+        </div>
         <app-song-list (selectSong)="onSelectSong($event)"></app-song-list>
       </div>
-      <div class="song-player-container">
+      <!-- <div class="song-player-container">
         <app-song-player [songId]="selectedSongId"></app-song-player>
-      </div>
+      </div>  -->
     </div>
   </div>
 </main>
 
-<app-song-form-modal
-  [showModal]="showSongFormModal"
-  (songGenerated)="onSongGenerated($event)"
+<app-song-form-modal [showModal]="showSongFormModal" (songGenerated)="onSongGenerated($event)"
   (closeModal)="closeSongFormModal()">
 </app-song-form-modal>
 

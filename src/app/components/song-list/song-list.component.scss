@@ -9,7 +9,7 @@ body {
 
 .container {
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 0px auto;
     padding: 20px;
     background: #fff;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -41,6 +41,7 @@ h1 {
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     font-size: 18px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
 }
 
 .tabs button:hover {
@@ -66,14 +67,15 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 12px;
     overflow: hidden;
-    width: 280px;
+    width: 230px;
+
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
     position: relative;
 
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.01);
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
 }
@@ -91,7 +93,7 @@ h1 {
 }
 
 .song-card .content h2 {
-    font-size: 20px;
+    font-size: 14px;
     margin: 10px 0;
     color: #333;
 }
@@ -100,14 +102,32 @@ h1 {
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
+
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
-    font-size: 16px;
-    
+    padding: 5px 17px;
+    border-radius: 25px;
+
+    font-size: 12px;
+
     &:hover {
         background: linear-gradient(135deg, #5b7bd4, #8c60c7);
         transform: scale(1.05);
     }
+}
+
+.h4 {
+    font-size: 14px;
+
+}
+
+.song-list__container {
+    max-height: 700px;
+    padding: 50px 0 100px 0;
+    overflow-y: scroll;
+}
+
+.left-padding {
+    padding-left: 12%;
+
 }

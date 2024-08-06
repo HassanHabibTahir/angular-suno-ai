@@ -5,9 +5,8 @@ import { SongListComponent } from './components/song-list/song-list.component';
 import { SongPlayerComponent } from './components/song-player/song-player.component';
 import { SongFormModalComponent } from './song-form-modal/song-form-modal.component';
 import { SocketService } from './services/socket.service';
-import { Subscription } from 'rxjs';
+import { catchError, finalize, of, Subscription, take } from 'rxjs';
 import { SongService } from './services/song.service';
-// Ensure correct path
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,7 @@ import { SongService } from './services/song.service';
     CommonModule,
     SongListComponent,
     SongPlayerComponent,
-    SongFormModalComponent,
+    SongFormModalComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -31,6 +30,7 @@ export class AppComponent {
   ) {}
   selectedSongId: string | null = null;
   showSongFormModal: boolean = false;
+  loading:boolean = false;
   @ViewChild(SongListComponent) songListComponent!: SongListComponent;
   onSelectSong(songId: string): void {
     this.selectedSongId = songId;
@@ -43,31 +43,35 @@ export class AppComponent {
     this.eventSubscription = this.socketService
       .on('new-event')
       .subscribe((data) => {
-        let event = data?.event?.parameters
-        if(event>=1){
-  // this.songService.generateSong({
-        //   prompt: event?.message,
-        //   tags: '',
-        //   title: event?.username,
-        //   make_instrumental: true,
-        //   wait_audio: true,
-        // }).pipe(
-        //   finalize(() => this.loading = false),
-        //   catchError(error => {
-        //     console.error('Error generating song:', error);
-        //     return of(null);
-        //   })
-        // ).subscribe({
-        //   next: (song) => {
-        //     if (song) {
-        //       this.songGenerated.emit(song);
-        //       this.closeModal.emit();
-        //     }
-        //   },
-        //   error: (error) => {
-        //     console.error('Error in subscription:', error);
-        //   },
-        // });
+        const { event } = data;
+        const { type , parameters } = event;
+        const { message, username , amount } = parameters; 
+        if(type != 'donation'){
+          return
+        }
+        if(amount && Number(amount) >= 1){
+            this.songService.generateSong({
+                      prompt: event?.message,
+                      tags: '',
+                      title: event?.username,
+                      make_instrumental: true,
+                      wait_audio: true,
+                    }).pipe(
+                      finalize(() => this.loading = false),
+                      catchError(error => {
+                        console.error('Error generating song:', error);
+                        return of(null);
+                      })
+                    ).subscribe({
+                      next: (song) => {
+                        if (song) {
+                          this.onSongGenerated(song);
+                        }
+                      },
+                      error: (error) => {
+                        console.error('Error in subscription:', error);
+                      },
+                    });
         }
         console.log('Event received in component:', data);
       

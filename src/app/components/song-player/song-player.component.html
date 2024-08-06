@@ -1,7 +1,16 @@
-<div *ngIf="song" class="song-player">
+<!-- <div *ngIf="song" class="song-player">
     <h2>{{ song.title }}</h2>
     <audio #audioPlayer controls [src]="song.audio_url">
       Your browser does not support the audio element.
     </audio>
+</div>
+<div *ngIf="!song">Loading...</div> -->
+
+
+<div *ngIf="song" class="song-player">
+  <h2>{{ song.title }}</h2>
+  <audio #audioPlayer controls [src]="song.audio_url">
+    Your browser does not support the audio element.
+  </audio>
 </div>
 <div *ngIf="!song">Loading...</div>

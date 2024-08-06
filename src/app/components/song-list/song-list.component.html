@@ -1,10 +1,29 @@
-<div class="song-list">
-    <div *ngFor="let song of songs" class="song-card">
-      <img [src]="song?.image_url" [alt]="song?.title" class="song-image"/>
-      <div class="content">
-        <h2>{{ song?.title }}</h2>
-        <button class="play-button" (click)="onSongSelect(song.id)">Play Song</button>
+<div class="row mt-5">
+  <div class="col-6">
+    <h1 class="text-start left-padding">Song Que List</h1>
+    <div class="song-list__container">
+
+      <div class="song-list">
+        <div *ngFor="let song of songs; let i = index" class="song-card">
+          <img [src]="song?.image_url" [alt]="song?.title" class="song-image" />
+          <div class="content">
+            <h2>{{ song?.title }}</h2>
+            <button class="play-button" (click)="onSongSelect(song.id)">Play Song</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+
+  <div class="col-6">
+
+    <div *ngIf="song" class="song-player">
+      <h1>Song Title</h1>
+      <h4 class="h4">{{ song.title }}</h4>
+      <audio #audioPlayer controls [src]="song.audio_url">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <div *ngIf="!song">Loading...</div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 .screen-divider {
     display: flex;
     gap: 20px;
-    flex-direction: row; 
+    flex-direction: row;
 }
 
 .song-list-container {
@@ -36,7 +36,7 @@
 }
 
 .songList_container {
-    width: 100%; 
+    width: 100%;
     max-width: 500px;
     display: flex;
     align-items: center;
@@ -44,31 +44,35 @@
     gap: 20px;
 }
 
-.createsongbtn{
+.createsongbtn {
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: #fff;
     border: none;
-    padding: 12px 25px;
+    padding: 8px 20px;
     cursor: pointer;
     border-radius: 30px;
     margin: 0 8px;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-    font-size: 18px;
+    font-size: 16px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: absolute;
+
+    top: 30px;
+    right: 20px;
 }
 
 @media (max-width: 768px) {
     .screen-divider {
-        flex-direction: column; 
+        flex-direction: column;
     }
 
     .song-list-container,
     .song-player-container {
-        width: 100%; 
-        margin-bottom: 20px; 
+        width: 100%;
+        margin-bottom: 20px;
     }
 
     .songList_container {
-        flex-direction: column; 
+        flex-direction: column;
     }
 }
