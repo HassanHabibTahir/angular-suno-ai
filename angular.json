@@ -95,6 +95,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/suno-song-generator-app",
+            "netlifyToken": "",
+            "siteId": ""
+          }
         }
       }
     }
