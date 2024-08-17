@@ -29,7 +29,7 @@ export class SongFormModalComponent {
       prompt: this.prompt,
       tags: this.tags,
       title: this.title,
-      make_instrumental: true,
+      make_instrumental: false,
       wait_audio: true,
     }).pipe(
       finalize(() => this.loading = false), 

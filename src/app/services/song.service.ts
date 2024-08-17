@@ -12,7 +12,7 @@ export class SongService {
 
   
   constructor(private http: HttpClient) {}
-  private apiUrl = 'https://suno-test-api.vercel.app/api';
+  private apiUrl = 'https://suno-api-five-seven.vercel.app/api';
   getAllSongs(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/get`);
   }
